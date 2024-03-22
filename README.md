@@ -1,7 +1,7 @@
-### Netflix-GPT
+# Netflix-GPT
 Welcome to Netflix-GPT, a project aimed at combining the familiar interface of Netflix with the power of GPT-based movie recommendations. This project is built using React and utilizes Firebase for authentication and real-time database functionalities.
 
-## Features
+### Features
 1. Authentication
 Signup: New users can create an account by providing a valid email address and password.
 Login: Existing users can log in to their accounts securely.
@@ -15,7 +15,7 @@ User Profiles: Each user has a personalized profile where they can manage their 
 Personalized Recommendations: GPT generates personalized movie recommendations based on user preferences, viewing history, and other factors.
 Smart Suggestions: Users receive intelligent suggestions for movies they might enjoy, enhancing their viewing experience.
 Continuous Learning: The recommendation system improves over time as it learns more about the user's preferences and behavior.
-## Getting Started
+### Getting Started
 To test or use the app, follow these steps:
 1. Clone this repository to your local machine:
    git clone https://github.com/yourusername/netflix-gpt.git
