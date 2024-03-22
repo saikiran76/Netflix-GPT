@@ -18,11 +18,11 @@ Continuous Learning: The recommendation system improves over time as it learns m
 ### Getting Started
 To test or use the app, follow these steps:
 1. Clone this repository to your local machine:
-   git clone https://github.com/yourusername/netflix-gpt.git
+   `git clone https://github.com/yourusername/netflix-gpt.git`
 2. Navigate to the project directory:
-   cd netflix-gpt
+   `cd netflix-gpt`
 3. Install dependencies using npm
-   npm install
+   `npm install`
 4. Start the development server:
-   npm start
+   `npm start`
 5. Open your web browser and visit http://localhost:3000 (or any other port but by default its 3000) to access the application.
