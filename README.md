@@ -16,7 +16,7 @@ Before diving into the project, make sure to set up your environment by adding a
 
 <img width="1821" alt="Auth" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/9becaf3c-1c64-4274-9af2-5b78a3b1427e">
 
-## 📝 Project Tasks
+## 📝 Implementation Inventory
 1. **Create React App**: Kickstart your project with the latest React features
 2. **TailwindCSS Configuration**: Style your project with ease using TailwindCSS
 3. **Header Implementation**: Set up a visually appealing header for easy navigation
