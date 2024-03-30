@@ -1,7 +1,7 @@
 # Netflix GPT
 
 ## 🚀 Project Overview
-Netflix GPT is a cutting-edge project that combines the power of Netflix-style movie browsing with the intelligence of OpenAI's GPT-3 technology. With a sleek design and seamless user experience, this project aims to revolutionize how users discover and interact with movie content.
+Netflix GPT is a cutting-edge project that combines the power of Netflix-style movie browsing with the intelligence of OpenAI's GPT technology. With a sleek design and seamless user experience, this project aims to revolutionize how users discover and interact with movie content.
 
 ## 🛠️ Project Setup
 Before diving into the project, make sure to set up your environment by adding a `.env` file and including your TMDB and OpenAI API keys.
@@ -11,6 +11,11 @@ Before diving into the project, make sure to set up your environment by adding a
 - **Browse Movies**: Explore a vast collection of movies after authentication
 - **Search Bar**: Easily find your favorite movies using the GPT-powered search feature
 - **Responsive Design**: Enjoy a seamless experience across all devices
+
+<img width="1821" alt="Auth" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/9becaf3c-1c64-4274-9af2-5b78a3b1427e">
+
+<img width="6304" alt="Feature" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/c8d89bef-6f3b-4191-b346-44ff8063c976">
+
 
 ## 📝 Project Tasks
 1. **Create React App**: Kickstart your project with the latest React features
