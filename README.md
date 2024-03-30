@@ -1,28 +1,69 @@
-# Netflix-GPT
-Welcome to Netflix-GPT, a project aimed at combining the familiar interface of Netflix with the power of GPT-based movie recommendations. This project is built using React and utilizes Firebase for authentication and real-time database functionalities.
+# Netflix GPT
 
-### Features
-1. Authentication
-Signup: New users can create an account by providing a valid email address and password.
-Login: Existing users can log in to their accounts securely.
-Logout: Users can log out of their accounts to end their session.
-2. Netflix-like Interface
-Browse Movies: Users can browse a catalog of movies, sorted by categories like genre, release year, or popularity.
-Movie Details: Users can view detailed information about each movie, including synopsis, cast, and ratings.
-Search: Users can search for movies by title, genre, or other keywords.
-User Profiles: Each user has a personalized profile where they can manage their preferences and viewing history.
-3. GPT-based Recommendations
-Personalized Recommendations: GPT generates personalized movie recommendations based on user preferences, viewing history, and other factors.
-Smart Suggestions: Users receive intelligent suggestions for movies they might enjoy, enhancing their viewing experience.
-Continuous Learning: The recommendation system improves over time as it learns more about the user's preferences and behavior.
-### Getting Started
-To test or use the app, follow these steps:
-1. Clone this repository to your local machine:
-   `git clone https://github.com/yourusername/netflix-gpt.git`
-2. Navigate to the project directory:
-   `cd netflix-gpt`
-3. Install dependencies using npm
-   `npm install`
-4. Start the development server:
-   `npm start`
-5. Open your web browser and visit http://localhost:3000 (or any other port but by default its 3000) to access the application.
+- Create React App
+- Configured TailwindCSS 
+- Header
+- Routing of App
+- Login Form
+- Sign up Form
+- Form Validation
+- useRef Hook
+- Firebase Setup
+- Deploying our app to production
+- Create SignUp User Account
+- Implement Sign In user Api
+- Created Redux Store with userSlice
+- Implemented Sign out 
+- Update Profile
+- BugFix: Sign up user displayName and profile picture update
+- BugFix: if the user is not logged in Redirect /browse to Login Page and vice-versa
+- Unsubscibed to the onAuthStateChanged callback
+- Add hardcoded values to the constants file (Try using Dynamic passing)
+- Regiter TMDB API & create an app & get access token
+- Get Data from TMDB now playing movies list API
+- Custom Hook for Now Playing Movies
+- Create movieSlice
+- Update Store with movies Data
+- Planning for MainContauiner & secondary container
+- Fetch Data for Trailer Video
+- Update Store with Trailer Video Data
+- Embedded the Yotube video and make it autoplay and mute
+- Tailwind Classes to make Main Container look awesome
+- Build Secondary Component
+- Build Movie List
+- build Movie Card
+- TMDB Image CDN URL
+- Made the Browsre page amazing with Tailwind CSS
+- usePopularMovies Custom hook
+- GPT Search Page
+- GPT Search Bar
+- (BONUS) Multi-language Feature in our App
+- Get Open AI Api Key 
+- Gpt Search API Call
+- fetched gptMoviesSuggestions from TMDB
+- created gptSlice added data
+- Resused Movie List component to make movie suggestion container
+- Memoization
+- Added .env file
+- Adding .env file to gitignore
+- Made our Site Responsive
+
+# Features
+- Login/Sign Up
+    - Sign In /Sign up Form
+    - redirect to Browse Page
+- Browse (after authentication)
+    - Header
+    - Main Movie
+        - Tailer in Background
+        - Title & Description
+        - MovieSuggestions
+            - MovieLists * N 
+- NetflixGPT
+    - Search Bar
+    - Movie Suggestions
+
+
+
+# Project Setup
+- Before starting the project please add .env file and add TMDB and OPENAI KEY into it.
