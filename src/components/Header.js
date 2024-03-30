@@ -42,7 +42,7 @@ const Header = () => {
 
     // Unsubscribe when component unmounts
     return () => unsubscribe();
-  }, []);
+  }, [dispatch, navigate]);
 
   const handleGptSearchClick = () => {
     // Toggle GPT Search
