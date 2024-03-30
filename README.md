@@ -14,7 +14,13 @@ Before diving into the project, make sure to set up your environment by adding a
 - **Search Bar**: Easily find your favorite movies using the GPT-powered search feature
 - **Responsive Design**: Enjoy a seamless experience across all devices
 
+<img width="942" alt="image" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/286500f3-bdbb-42d9-a85b-35340882c722">
+
+
 <img width="1821" alt="Auth" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/9becaf3c-1c64-4274-9af2-5b78a3b1427e">
+
+<img width="930" alt="image" src="https://github.com/saikiran76/Netflix-GPT/assets/80874246/26002792-96cb-43df-ab16-9dcd142fd906">
+
 
 ## 📝 Implementation Inventory
 1. **Create React App**: Kickstart your project with the latest React features
