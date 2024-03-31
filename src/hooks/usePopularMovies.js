@@ -9,30 +9,18 @@ const usePopularMovies = () => {
 
   const popularMovies = useSelector((store) => store.movies.popularMovies);
 
-
-  const useMovieTrailer = (movieId) => {
-  const dispatch = useDispatch();
-
-  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
-
-  
   useEffect(() => {
-    const getMovieVideos = async () => {
+    const getPopularMovies = async () => {
       const data = await fetch(
-        "https://api.themoviedb.org/3/movie/" +
-          movieId +
-          "/videos?language=en-US",
+        "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
         API_OPTIONS
       );
       const json = await data.json();
-  
-      const filterData = json.results.filter((video) => video.type === "Trailer");
-      const trailer = filterData.length ? filterData[0] : json.results[0];
-      dispatch(addTrailerVideo(trailer));
+      dispatch(addPopularMovies(json.results));
     };
-    !trailerVideo && getMovieVideos();
-  }, [movieId, trailerVideo, dispatch]);
+    !popularMovies && getPopularMovies();
+  }, [popularMovies, dispatch]);
 };
 
-
 export default usePopularMovies;
+
