@@ -56,3 +56,9 @@ Before diving into the project, make sure to set up your environment by adding a
 
 ## 🌟 Let's Get Started!
 Join us on this exciting journey to redefine the movie browsing experience. Together, we can create a project that not only stands out but also sets new standards in user interaction and content discovery. 🍿🎉
+
+Visit the live application (deployed on firebase): [Deployed application 🔗](https://netgpt-b774f.web.app/)
+
+
+
+
