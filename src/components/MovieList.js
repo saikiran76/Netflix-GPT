@@ -1,8 +1,7 @@
-import React from 'react';
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  // Make sure the movies prop is an array before mapping
+  // Ensure the movies prop is an array before mapping
   const movieArray = Array.isArray(movies) ? movies : [];
 
   return (
@@ -11,7 +10,7 @@ const MovieList = ({ title, movies }) => {
       <div className="flex overflow-x-scroll custom-scrollbar">
         <div className="flex">
           {movieArray.map((movie) => (
-            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+            <MovieCard key={movie.id || movie.title} movie={movie} />
           ))}
         </div>
       </div>

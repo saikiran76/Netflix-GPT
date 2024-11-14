@@ -1,93 +1,140 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
-import FLIXY from '../img/flixyai.png'
+import { Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUser, removeUser } from "../utils/userSlice";
+import { removeUser } from "../utils/userSlice";
 import { toggleGptSearchView } from "../utils/gptSlice";
-import { changeLanguage } from "../utils/configSlice";
+import { motion } from "framer-motion";
+import logo from '../img/flixyai.png';
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {})
-      .catch((error) => {
-        navigate("/error");
-      });
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  // Determine if the user is authenticated or a guest
+  const isAuthenticated = user?.uid || user?.isGuest;
+
+  // Handler to log the user out
+  const handleLogout = async () => {
+    await signOut(auth);
+    dispatch(removeUser());
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        navigate("/browse");
-      } else {
-        dispatch(removeUser());
-        navigate("/");
-      }
-    });
+  // Handler for contacting the developer, smooth scrolling to the footer section
+  const handleContactDeveloperClick = () => {
+    const footerElement = document.getElementById('contact-developer');
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-    // Unsubscribe when component unmounts
-    return () => unsubscribe();
-  }, []);
-
+  // Handler to toggle GPT Search feature
   const handleGptSearchClick = () => {
-    // Toggle GPT Search
     dispatch(toggleGptSearchView());
   };
 
-  const handleLanguageChange = (e) => {
-    dispatch(changeLanguage(e.target.value));
-  };
+  // Navigation items with their routes and conditions
+  const navItems = [
+    {
+      name: "My Bucket List",
+      path: "/bucket-list",
+      isActive: location.pathname === "/bucket-list",
+      visible: isAuthenticated,
+    },
+    {
+      name: "GPT Search",
+      onClick: handleGptSearchClick,
+      isActive: showGptSearch,
+      visible: isAuthenticated,
+    },
+    {
+      name: "Profile",
+      path: "/profile",
+      isActive: location.pathname === "/profile",
+      visible: isAuthenticated,
+    },
+    {
+      name: "Contact Developer",
+      onClick: handleContactDeveloperClick,
+      isActive: false, // No active state for this link
+      visible: true, // Visible to all users
+    },
+  ];
 
   return (
-    <div className="absolute w-[98vw] px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between font-martelsans">
-      <img className="w-44 mx-auto md:mx-0" src={FLIXY} alt="logo" />
-      {user && (
-        <div className="flex p-2 justify-between">
-          {showGptSearch && (
-            <select
-              className="p-2 m-2 bg-gray-900 text-white"
-              onChange={handleLanguageChange}
-            >
-              {SUPPORTED_LANGUAGES.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-          )}
-          <button
-            className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
-            onClick={handleGptSearchClick}
-          >
-            {showGptSearch ? "Homepage" : "GPT Search"}
+    <header className="flex justify-between items-center p-4 bg-opacity-80 text-white font-martelsans relative">
+      {/* Logo and Home Link */}
+      <Link to={isAuthenticated ? "/browse" : "/"} className="text-xl md:text-3xl font-bold">
+        <img src={logo} alt="FlixyAI" className="w-32 h-auto" />
+      </Link>
+      {/* Navigation and User Info Section */}
+      <nav className="flex items-center space-x-4 relative">
+        {/* Dynamically generated navigation items */}
+        {navItems.map((item, index) =>
+          item.visible ? <NavItem key={index} item={item} showGptSearch={showGptSearch} /> : null
+        )}
+        {/* Conditional rendering for user login/logout */}
+        {!user?.uid && !user?.isGuest && (
+          <Link to="/login" className="relative py-2 px-3 rounded-lg hover:underline">
+            Login
+          </Link>
+        )}
+        {user?.uid && (
+          <button className="relative py-2 px-3 rounded-lg hover:underline" onClick={handleLogout}>
+            Logout
           </button>
-          <img
-            className="hidden md:block w-12 h-12"
-            alt="usericon"
-            src={user?.photoURL}
-          />
-          <button onClick={handleSignOut} className="font-bold text-white ">
-            (Sign Out)
+        )}
+        {user?.isGuest && (
+          <button className="relative py-2 px-3 rounded-lg hover:underline" onClick={handleLogout}>
+            Exit Guest
           </button>
-        </div>
-      )}
-    </div>
+        )}
+        {user?.isGuest && <p className="mx-4">Guest</p>}
+        {!user?.isGuest && user?.displayName && <p className="mx-4">Hello, {user.displayName}</p>}
+      </nav>
+    </header>
   );
 };
+
 export default Header;
+
+/** NavItem Component to handle individual navigation items */
+const NavItem = ({ item, showGptSearch }) => {
+  const { name, path, onClick, isActive } = item;
+
+  if (path) {
+    return (
+      <Link
+        to={path}
+        className="relative py-2 px-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition"
+      >
+        {name}
+        {isActive && <ActiveIndicator />}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      className="relative py-2 px-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition"
+    >
+      {name}
+      {isActive && <ActiveIndicator />}
+    </button>
+  );
+};
+
+/** ActiveIndicator component - the animated background for active navigation item */
+const ActiveIndicator = () => {
+  return (
+    <motion.div
+      layoutId="activeIndicator"
+      className="absolute inset-0 bg-red-700 z-[-1] rounded-lg"
+      initial={false}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+    />
+  );
+};

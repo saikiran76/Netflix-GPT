@@ -20,18 +20,18 @@ const GptSearchBar = () => {
 
       const response = await axios.post("http://localhost:4000/get-movie-recommendations", requestData);
 
-       const gptMovies = response.data.movieNames
-       .map((movie) => movie.replace(/[`\n]/g, '').trim()) 
-       .filter(Boolean); 
+      const gptMovies = response.data.movieNames
+        .map((movie) => movie.replace(/[`\n]/g, '').trim()) 
+        .filter(Boolean); 
 
-     const movieResults = Array.isArray(response.data.movieResults)
-       ? response.data.movieResults
-       : [];
+      const movieResults = Array.isArray(response.data.movieResults)
+        ? response.data.movieResults
+        : [];
 
-     console.log("Cleaned movie names: ", gptMovies);
-     console.log("Movie results: ", movieResults);
+      console.log("Cleaned movie names: ", gptMovies);
+      console.log("Movie results: ", movieResults);
 
-     dispatch(addGptMovieResult({ movieNames: gptMovies, movieResults }));
+      dispatch(addGptMovieResult({ movieNames: gptMovies, movieResults }));
 
     } catch (err) {
       console.error(err);
@@ -48,14 +48,14 @@ const GptSearchBar = () => {
         <input
           ref={searchText}
           type="text"
-          className="p-4 m-4 col-span-9"
-          placeholder={lang[langKey].gptSearchPlaceholder}
+          className="p-4 m-4 col-span-9 bg-gray-700 rounded"
+          placeholder={lang[langKey].gptSearchPlaceholder || "Enter your movie preference..."}
         />
         <button
           className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
           onClick={handleGptSearchClick}
         >
-          {lang[langKey].search}
+          {lang[langKey].search || "Search"}
         </button>
       </form>
       {error && (
