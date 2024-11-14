@@ -1,77 +1,54 @@
-import openai from "../utils/openai";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstants";
-import { API_OPTIONS } from "../utils/constants";
+import axios from 'axios'
 import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
-
-  // search movie in TMDB
-  const searchMovieTMDB = async (movie) => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS
-    );
-    const json = await data.json();
-
-    return json.results;
-  };
+  const [error, setError] = useState(null);
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
-    // Make an API call to GPT API and get Movie Results
+    try {
+      const searchQuery = searchText.current.value;
 
-    const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      searchText.current.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
+      const requestData = {
+        query: searchQuery,
+      };
 
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+      const response = await axios.post("http://localhost:4000/get-movie-recommendations", requestData);
 
-    if (!gptResults.choices) {
-      // TODO: Write Error Handling
+       const gptMovies = response.data.movieNames
+       .map((movie) => movie.replace(/[`\n]/g, '').trim()) 
+       .filter(Boolean); 
+
+     const movieResults = Array.isArray(response.data.movieResults)
+       ? response.data.movieResults
+       : [];
+
+     console.log("Cleaned movie names: ", gptMovies);
+     console.log("Movie results: ", movieResults);
+
+     dispatch(addGptMovieResult({ movieNames: gptMovies, movieResults }));
+
+    } catch (err) {
+      console.error(err);
+      setError("An error occurred. Please try again later.");
     }
-
-    console.log(gptResults.choices?.[0]?.message?.content);
-
-    // Andaz Apna Apna, Hera Pheri, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan
-    const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
-
-    // ["Andaz Apna Apna", "Hera Pheri", "Chupke Chupke", "Jaane Bhi Do Yaaro", "Padosan"]
-
-    // For each movie I will search TMDB API
-
-    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-    // [Promise, Promise, Promise, Promise, Promise]
-
-    const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
-
-    dispatch(
-      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
-    );
   };
 
   return (
-    <div className="pt-[35%] md:pt-[10%] flex justify-center pb-4 bg-opacity-50 backdrop-filter backdrop-blur-lg backdrop-saturate-150 rounded-md">
+    <div className="pt-[35%] md:pt-[10%] w-[90vw] flex justify-center pb-4 bg-opacity-50 backdrop-filter backdrop-blur-lg backdrop-saturate-150 rounded-md font-martelsans">
       <form
-        className="w-full md:w-1/2 bg-black grid grid-cols-12"
+        className="w-full md:w-1/2 bg-black grid grid-cols-12 rounded-md ml-8"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
           type="text"
-          className=" p-4 m-4 col-span-9"
+          className="p-4 m-4 col-span-9"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
@@ -81,7 +58,36 @@ const GptSearchBar = () => {
           {lang[langKey].search}
         </button>
       </form>
+      {error && (
+        <ErrorPopup message={error} onClose={() => setError(null)} />
+      )}
     </div>
   );
 };
+
+const ErrorPopup = ({ message, onClose }) => {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-black opacity-50"
+        onClick={onClose}
+      ></div>
+      {/* Modal */}
+      <div className="bg-white rounded-lg p-6 z-10 max-w-sm mx-auto">
+        <h2 className="text-xl font-bold mb-4 text-center text-red-700">
+          Oops!
+        </h2>
+        <p className="text-gray-800 mb-2">{message}</p>
+        <button
+          className="w-full py-2 px-4 bg-red-700 text-white rounded-lg hover:bg-red-600"
+          onClick={onClose}
+        >
+          Go Back
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default GptSearchBar;

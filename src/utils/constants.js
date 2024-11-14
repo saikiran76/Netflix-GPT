@@ -8,11 +8,13 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOTA3ZjA3M2E4MjRlOGMxZjU1NTgyZmYzNDNmZmY2YiIsInN1YiI6IjY2MDUxZDE4ODEzY2I2MDE0NzE4OTQ0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6jZjyfKaviyysIOwb_w212jGMB807U2G8GLU7s12Ltw",
+    Authorization: `Bearer ${process.env.REACT_APP_TOKEN_KEY}`,
   },
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const GOOGLE_LOGO = "https://e7.pngegg.com/pngimages/715/371/png-clipart-youtube-google-logo-google-s-google-account-youtube-text-trademark.png"
 
 export const BG_URL =
   "https://assets.nflxext.com/ffe/siteui/vlv3/9d3533b2-0e2b-40b2-95e0-ecd7979cc88b/a3873901-5b7c-46eb-b9fa-12fea5197bd3/IN-en-20240311-popsignuptwoweeks-perspective_alpha_website_small.jpg";
@@ -23,6 +25,9 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = "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"
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY 
+
+export const GEMINI_KEY = process.env.REACT_APP_GEMINIAPI_KEY
+
 
 // process.env.REACT_APP_OPENAI_KEY;

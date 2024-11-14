@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "flixyai",
+    "issuedgpt": "netgpt-b774f",
+    "issuegpt": "netgpt-b774f",
+    "flixy": "flixyai"
+  },
+  "targets": {},
+  "etags": {}
+}

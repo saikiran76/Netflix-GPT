@@ -1,9 +1,15 @@
 import OpenAI from "openai";
-import { OPENAI_KEY } from "./constants";
+import { GeminiClient } from 'gemini-client'; 
+import { GEMINI_KEY } from "./constants";
 
-const openai = new OpenAI({
-  apiKey: OPENAI_KEY,
-  dangerouslyAllowBrowser: true,
+// const openai = new OpenAI({
+//   apiKey: OPENAI_KEY,
+//   dangerouslyAllowBrowser: true,
+// });
+
+const geminiClient = new GeminiClient({
+  apiKey: GEMINI_KEY,
+  // Other configuration options as required by the Gemini API
 });
 
-export default openai;
+export default geminiClient;
