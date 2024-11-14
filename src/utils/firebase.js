@@ -8,13 +8,13 @@ import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "AIzaSyD3ueXI94zOMu6DQpP-4eNH6lK7ctM61Q8",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "flixyai.firebaseapp.com",
   projectId: "flixyai",
   storageBucket: "flixyai.firebasestorage.app",
   messagingSenderId: "194441512510",
-  appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:194441512510:web:c3a5e777e097547228736f",
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || "G-7YBWR61GP7"
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
 // Initialize Firebase
@@ -24,7 +24,7 @@ export const messaging = getMessaging(app);
 
 export const requestPermissionForNotifications = async () => {
   try {
-    const token = await getToken(messaging, { vapidKey: process.env.REACT_APP_VAPID_KEY || "BNTQAETNh69uBnoiyuSaWRKQdMutCqzhDn7qEHoNK4Tp2sE1_vN04ChZt0DZWrtj7ihO1g0jQqdurJwrAkJjnd4" });
+    const token = await getToken(messaging, { vapidKey: process.env.REACT_APP_VAPID_KEY });
     console.log('User FCM registration token:', token);
     return token;
   } catch (error) {
