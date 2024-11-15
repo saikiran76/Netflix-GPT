@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToBucketList } from "../utils/userSlice";
 import { IMG_CDN_URL } from "../utils/constants";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const MovieCard = ({ movie, hideAddButton }) => {
   const { poster_path, id, title } = movie || {};
@@ -15,12 +17,13 @@ const MovieCard = ({ movie, hideAddButton }) => {
   if (!poster_path) return null; // Return nothing if no poster path
 
   const handleAddToBucketList = () => {
-    if (!user.uid && !user.isGuest) {
+    if (!user.uid || !user.isGuest) {
       // If not logged in or guest, prompt to log in or show an alert
       alert("Please sign in or continue as guest to add movies to your bucket list.");
       return;
     }
     dispatch(addToBucketList(movie.id));
+    toast.success(`${movie.title} added to bucket list!`);
     setMovieAdded(true);
     setTimeout(() => {
       setMovieAdded(false);
@@ -40,6 +43,7 @@ const MovieCard = ({ movie, hideAddButton }) => {
   const shouldHideAddButton = hideAddButton || isOnBucketListPage;
 
   return (
+    <>
     <div className="w-36 md:w-48 pr-4 font-martelsans relative transform transition-transform hover:scale-105">
       <img
         alt={`${title || 'Movie Poster'}`}
@@ -77,6 +81,8 @@ const MovieCard = ({ movie, hideAddButton }) => {
         </div>
       )}
     </div>
+    
+    </>
   );
 };
 

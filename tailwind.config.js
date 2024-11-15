@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      'martelsans': ['Martel Sans', 'sans-serif']
+      'martelsans': ['Martel Sans', 'sans-serif'],
+      grace: ["Covered By Your Grace", "cursive"],
+      man: ["Manrope", "sans-serif"]
+      
     }
   },
   plugins: [],

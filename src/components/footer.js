@@ -28,14 +28,14 @@ const Footer = () => {
   // to logged-in users, keep `isLoggedIn` check and navigate to login.
 
   return (
-    <footer id="contact-developer" className="bg-black text-white p-8 mt-8">
-      <h2 className="text-2xl mb-4">Contact Developer</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col max-w-md">
-        {submitStatus && <p className="mb-4 text-green-500">{submitStatus}</p>}
+    <footer id="contact-developer" className="bg-black text-white p-8 mt-8 font-man flex justify-center items-center gap-[4rem]">
+      <h2 className="text-2xl mb-4 font-man">Contact Developer</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col max-w-md font-man">
+        {submitStatus && <p className="mb-4 text-green-500 font-man">{submitStatus}</p>}
         <label className="mb-2">
           Name:
           <input
-            className="w-full p-2 mt-1 bg-gray-700 rounded"
+            className="w-full p-2 mt-1 bg-gray-700 rounded font-man"
             type="text"
             name="name"
             value={formData.name}
