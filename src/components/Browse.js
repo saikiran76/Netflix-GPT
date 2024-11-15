@@ -31,7 +31,7 @@ const Browse = () => {
   }, [location.state]);
 
   return (
-    <div>
+    <div className="bg-black">
       <Header />
       {showGptSearch ? (
         <>

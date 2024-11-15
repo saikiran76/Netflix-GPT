@@ -22,7 +22,7 @@ const Profile = () => {
   }, [isLoggedIn, navigate, recommendations]);
 
   return (
-    <div>
+    <div className="bg-black h-screen font-man">
       <Header />
       <div className="p-6 text-white">
         <h1 className="text-3xl font-bold">User Profile</h1>

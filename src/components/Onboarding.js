@@ -5,7 +5,7 @@ import Footer from './footer'
 
 const Onboarding = () => {
   return (
-    <div>
+    <div className='bg-[#FBF8EF]'>
         <About/>
         <FaContainer/>
         <Footer/>

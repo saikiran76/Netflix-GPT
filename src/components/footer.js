@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <footer id="contact-developer" className="bg-black text-white p-8 mt-8 font-man flex justify-center items-center gap-[4rem]">
       <h2 className="text-2xl mb-4 font-man">Contact Developer</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col max-w-md font-man">
+      <form onSubmit={handleSubmit} className="flex flex-col max-w-md font-man bg-black">
         {submitStatus && <p className="mb-4 text-green-500 font-man">{submitStatus}</p>}
         <label className="mb-2">
           Name:

@@ -53,7 +53,7 @@ const MovieCard = ({ movie, hideAddButton }) => {
       <h2 className="text-sm font-bold mt-2">{title || "Unknown Title"}</h2>
       {!shouldHideAddButton && (
         <button
-          className={`mt-1 p-1 text-xs rounded transition ${
+          className={`mt-1 p-1 text-xs rounded transition font-man ${
             movieAdded ? "bg-green-700 hover:bg-green-800" : "bg-red-700 hover:bg-red-800"
           }`}
           onClick={handleAddToBucketList}
@@ -63,17 +63,17 @@ const MovieCard = ({ movie, hideAddButton }) => {
         </button>
       )}
       <button
-        className="mt-1 p-1 text-xs bg-blue-700 rounded hover:bg-blue-800 transition"
+        className="mt-1 p-1 text-xs bg-blue-700 font-man rounded hover:bg-blue-800 transition"
         onClick={handleMoreInfo}
       >
         More Info
       </button>
       {showInfoPopup && (
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-75 flex flex-col items-center justify-center p-4">
-          <h3 className="text-xl mb-4">Feature Coming Soon!</h3>
-          <p>More info for this movie will be available soon.</p>
+          <h3 className="text-xl mb-4 text-gray-500">Feature Coming Soon!</h3>
+          <p className="text-gray-500">More info for this movie will be available soon.</p>
           <button
-            className="mt-4 p-2 bg-red-700 rounded hover:bg-red-800 transition"
+            className="mt-4 p-2 bg-red-700 rounded hover:bg-red-800 transition text-gray-500"
             onClick={closePopup}
           >
             Back

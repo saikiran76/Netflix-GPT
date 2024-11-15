@@ -108,7 +108,7 @@ const NavItem = ({ item, showGptSearch }) => {
     return (
       <Link
         to={path}
-        className="relative py-2 px-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition"
+        className="relative py-2 px-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition bg-black"
       >
         {name}
         {isActive && <ActiveIndicator />}

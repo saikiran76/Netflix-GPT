@@ -39,7 +39,7 @@ const BucketList = () => {
   }, [isLoggedIn, user, navigate]);
 
   return (
-    <div className="font-martelsans">
+    <div className="font-martelsans bg-black h-screen">
       <Header />
       <h1 className="text-white m-4 font-bold font-martelsans ml-10 mt-7 text-3xl">My Bucket List</h1>
       {bucketListMovies.length === 0 ? (
